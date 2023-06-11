@@ -36,7 +36,6 @@ export default function SignUp() {
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(userData);
         // Check if any required fields are empty
         if (!userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.username) {
             { alert('Please fill in all the required fields') }
@@ -46,6 +45,7 @@ export default function SignUp() {
         try {
             const result = await signup(userData)
             setSignUp(initialSignup);
+            navigate('/signin');
         }
         catch (error) {
             if (error.statusCode !== 201) {
