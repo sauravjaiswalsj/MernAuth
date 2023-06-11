@@ -20,6 +20,7 @@ export default function SignUp() {
     const initialSignup = {
         firstName: '',
         lastName: '',
+        username: '',
         email: '',
         password: ''
     }
@@ -37,7 +38,7 @@ export default function SignUp() {
         event.preventDefault();
         console.log(userData);
         // Check if any required fields are empty
-        if (!userData.firstName || !userData.lastName || !userData.email || !userData.password) {
+        if (!userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.username) {
             { alert('Please fill in all the required fields') }
             return;
         }
@@ -114,6 +115,19 @@ export default function SignUp() {
                                         />
                                     </MDBCol>
                                 </MDBRow>
+
+                                <MDBInput
+                                    wrapperClass='mb-4'
+                                    required
+                                    label='username'
+                                    id='username'
+                                    type='text'
+                                    name='username'
+                                    value={userData.username}
+                                    autoComplete="family-name"
+                                    onChange={handleChange}
+
+                                />
 
                                 <MDBInput
                                     wrapperClass='mb-4'
