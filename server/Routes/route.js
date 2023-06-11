@@ -14,7 +14,7 @@ const updataUser = require('../Controllers/updateUser');
 
 router.post('/signup', signup);
 router.post('/signin', signin);
-router.post('/updateUser', updataUser);
+router.put('/updateUser', updataUser);
 //router.post('/forget-password', reset);
 
 

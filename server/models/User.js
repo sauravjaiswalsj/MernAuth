@@ -10,9 +10,21 @@ User.init({
     lastName: {
         type: DataTypes.STRING,
     },
-    // email: {
-    //     type: DataTypes.STRING,
-    // },
+    username: {
+        type: DataTypes.STRING,
+        unique: true, // Add this to ensure uniqueness
+        primaryKey: true,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+        indexes: [
+            {
+                unique: true,
+                fields: ['username'], // Add an index on the username field
+            }
+        ]
+    },
     email: {
         type: DataTypes.STRING,
         unique: true, // Add this to ensure uniqueness
