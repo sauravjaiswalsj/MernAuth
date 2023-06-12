@@ -1,17 +1,20 @@
-//profile
+//Updateprofile
 const URI = "http://localhost:3000/api/v1"
-const profile = async (username) => {
+const updateUser = async (username, user) => {
     try {
-        const response = await fetch(`${URI}/${username}`, {
-            method: 'GET',
+        const response = await fetch(`${URI}/update/${username}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify(user)
         });
+
         if (response.ok) {
             const result = await response.text();
             return result;
-        } else {
+        }
+        else {
             const errorText = await response.text();
             const statusCode = response.status;
 
@@ -19,7 +22,7 @@ const profile = async (username) => {
                 throw { errorText, statusCode };
             }
             else {
-                throw new Error(`failed to fetch Profile: ${errorText}`);
+                throw new Error(`failed to put Profile: ${errorText}`);
             }
         }
     }
@@ -28,4 +31,4 @@ const profile = async (username) => {
     }
 };
 
-export default profile;
+export default updateUser;

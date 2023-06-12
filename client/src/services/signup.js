@@ -1,8 +1,8 @@
 //signup
-const URI = "http://localhost:3000/api/v1/"
+const URI = "http://localhost:3000/api/v1"
 const signup = async (user) => {
     try {
-        const response = await fetch(`${URI}signup`, {
+        const response = await fetch(`${URI}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

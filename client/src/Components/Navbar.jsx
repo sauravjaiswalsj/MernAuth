@@ -2,10 +2,13 @@ import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppBar, Button, CssBaseline, Toolbar, Typography, Link, GlobalStyles } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'preact/hooks';
 
 const defaultTheme = createTheme();
 
-export default function Pricing() {
+export default function Navbar() {
+    const [isloggedIn, setLoggedIn] = useState(false);
+
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={defaultTheme}>

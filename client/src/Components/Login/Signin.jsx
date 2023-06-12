@@ -2,7 +2,6 @@ import React from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { useState } from 'preact/hooks';
 import signin from '../../services/signin';
-import setSessionData from '../../services/setSessionData';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signin() {
@@ -28,15 +27,11 @@ export default function Signin() {
             { alert('Please fill in all the required fields') }
             return;
         }
-
         try {
-            const result = await signin(loginData)
-            console.log(result);
+            const res = await signin(loginData)
+            const result = JSON.parse(res);
             setSignIn(initialSignup); // Reset the form fields to initial values
-            console.log('signin' + result)
-            console.log(typeof (result));
-            setSessionData(result);
-            navigate('/profile', { state: { user: result } });
+            navigate(`/users/${result.username}`);
         }
         catch (error) {
             if (error.statusCode !== 201) {
@@ -84,11 +79,8 @@ export default function Signin() {
                                 <p className="small fw-bold mt-4 pt-2 mb-2">Don't have an account? <a href="/signup" className="link-danger">Register</a></p>
                             </div>
 
-
                             <div className="d-flex flex-row">
-
                                 <p className="lead fw-normal mb-0 me-3">Sign in with</p>
-
                                 <MDBBtn floating size='md' tag='a' className='me-2'>
                                     <MDBIcon fab icon='facebook-f' />
                                 </MDBBtn>
