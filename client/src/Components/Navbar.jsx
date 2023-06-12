@@ -50,7 +50,7 @@ export default function Navbar({ isLoggedIn, setLoggedIn }) {
                         <Link
                             color="inherit"
                             variant="button"
-                            href="#"
+                            href="/about"
                             sx={{ my: 1, mx: 1.5, textDecoration: "none" }}
                         >
                             About

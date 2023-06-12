@@ -4,6 +4,7 @@ import SignUp from './Components/Register/SignUp';
 import Navbar from './Components/Navbar';
 import SignIn from './Components/Login/Signin';
 import Home from './Components/Home';
+import About from './Components/About/About';
 import Profile from './Components/Profile/Profile';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState, useEffect } from 'preact/hooks';
@@ -33,6 +34,7 @@ export function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn setLoggedIn={setLoggedIn} />} />
             <Route path="/users/:username" element={<Profile />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </QueryClientProvider>
       </BrowserRouter>
