@@ -6,19 +6,32 @@ import SignIn from './Components/Login/Signin';
 import Home from './Components/Home';
 import Profile from './Components/Profile/Profile';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { useState, useEffect } from 'preact/hooks';
 
 const queryClient = new QueryClient();
 
 export function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is already logged in (e.g., token exists in session storage)
+    if (sessionStorage.getItem('user'))
+      setLoggedIn(true);
+
+    console.log(isLoggedIn);
+
+  }, []);
+
+
   return (
     <>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Navbar />
+          <Navbar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
           <Routes>
             <Route index element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signin" element={<SignIn setLoggedIn={setLoggedIn} />} />
             <Route path="/users/:username" element={<Profile />} />
           </Routes>
         </QueryClientProvider>

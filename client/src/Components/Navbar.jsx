@@ -2,14 +2,22 @@ import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppBar, Button, CssBaseline, Toolbar, Typography, Link, GlobalStyles } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 
 const defaultTheme = createTheme();
 
-export default function Navbar() {
-    const [isloggedIn, setLoggedIn] = useState(false);
-
+export default function Navbar({ isLoggedIn, setLoggedIn }) {
     const navigate = useNavigate();
+
+    console.log('NavBar', isLoggedIn);
+
+    const handleLogout = () => {
+        // Perform logout logic here
+        sessionStorage.removeItem('user');
+        navigate('/');
+        setLoggedIn(false);
+    };
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' }, color: "#FFFFFF" }} />
@@ -48,9 +56,15 @@ export default function Navbar() {
                             About
                         </Link>
                     </nav>
-                    <Button href="#" variant="outlined" onClick={() => navigate('/signin')} sx={{ my: 1, mx: 1.5 }}>
-                        Login
-                    </Button>
+                    {isLoggedIn ? (
+                        <Button variant="outlined" onClick={handleLogout} sx={{ my: 1, mx: 1.5 }}>
+                            Logout
+                        </Button>
+                    ) : (
+                        <Button href="#" variant="outlined" onClick={() => navigate('/signin')} sx={{ my: 1, mx: 1.5 }}>
+                            Login
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
         </ThemeProvider>

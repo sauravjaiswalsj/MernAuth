@@ -3,7 +3,8 @@ import profile from '../../services/profile';
 import { useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
 import UserCard from './UserCard';
-import updateUser from '../../services/updateUser.js'
+import updateUser from '../../services/updateUser.js';
+import { useNavigate } from 'react-router-dom';
 
 async function fetchUserProfile(username) {
     try {
@@ -24,9 +25,14 @@ async function fetchUserProfile(username) {
 }
 
 export default function PersonalProfile() {
-
+    useEffect(() => {
+        // Check if the user is already logged in (e.g., token exists in session storage)
+        if (!sessionStorage.getItem('user')) {
+            navigate('/');
+        }
+    }, []);
     const { username } = useParams();
-
+    const navigate = useNavigate();
     const { data: userData, isLoading: isUserLoading, isError: isUserError, refetch } = useQuery(['userData', username], () => fetchUserProfile(username), {
         cacheTime: 120000, // Data will be cached for 2 minute
         staleTime: 60000

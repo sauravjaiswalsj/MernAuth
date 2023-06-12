@@ -3,8 +3,9 @@ import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } 
 import { useState } from 'preact/hooks';
 import signin from '../../services/signin';
 import { useNavigate } from 'react-router-dom';
+import setSessionData from '../../services/setSessionData';
 
-export default function Signin() {
+export default function Signin({ setLoggedIn }) {
 
     const initialSignup = {
         email: '',
@@ -31,6 +32,8 @@ export default function Signin() {
             const res = await signin(loginData)
             const result = JSON.parse(res);
             setSignIn(initialSignup); // Reset the form fields to initial values
+            setSessionData(result.username + 334231);
+            setLoggedIn(true);
             navigate(`/users/${result.username}`);
         }
         catch (error) {

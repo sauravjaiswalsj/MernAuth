@@ -9,7 +9,7 @@ const signin = async (user) => {
             },
             body: JSON.stringify(user)
         });
-        console.log(response);
+
         if (response.ok) {
             const result = await response.text();
             //console.log(result);
