@@ -11,15 +11,12 @@ const signin = async (req, res) => {
             return res.status(400).send(`Error: Please enter your correct email`);
         }
 
-        // const userExist = await User.findOne({
-        //     where: { email: email }
-        // });
         //improves performace
         const userExist = await User.findOne({
             where: {
                 email: email,
             },
-            attributes: ['firstName', 'lastName', 'password'],
+            attributes: ['username', 'password'],
             raw: true, // Return plain object instead of a Sequelize model instance
         });
 
@@ -33,10 +30,11 @@ const signin = async (req, res) => {
         if (!passMatch) {
             return res.status(400).send(`Error: Incorrect Password`);
         }
-        const user = { firstName: userExist.firstName, lastName: userExist.lastName, email: email }
-        console.log(typeof (user));
+
+        const user = { username: userExist.username }
         res.setHeader('Content-Type', 'application/json');
         res.status(201).json(user);
+
     } catch (err) {
         console.log(err);
         return res.status(500).send(`Error:${err.message}`);
