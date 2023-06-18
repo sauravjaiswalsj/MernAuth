@@ -7,6 +7,7 @@ import Home from './Components/Home';
 import About from './Components/About/About';
 import Profile from './Components/Profile/Profile';
 import Forgot from './Components/Forgot/forgot';
+import Reset from './Components/Forgot/reset';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState, useEffect } from 'preact/hooks';
 
@@ -36,6 +37,7 @@ export function App() {
             <Route path="/signin" element={<SignIn setLoggedIn={setLoggedIn} />} />
             <Route path="/forgot" element={<Forgot setLoggedIn={setLoggedIn} />} />
             <Route path="/users/:username" element={<Profile />} />
+            <Route path="/:token" element={<Reset setLoggedIn={setLoggedIn} />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </QueryClientProvider>

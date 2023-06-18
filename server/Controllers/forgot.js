@@ -18,7 +18,7 @@ const forgot = async (req, res) => {
             where: {
                 email: email,
             },
-            attributes: ['username', 'password'],
+            attributes: ['username', 'firstName'],
             raw: true, // Return plain object instead of a Sequelize model instance
         });
 
@@ -43,13 +43,13 @@ const forgot = async (req, res) => {
                 pass: process.env.SendBluePassword,
             }
         });
-        const resetEmail = `http://localhost:${process.env.port}/resetPassword.html?token=${token}`
+        const resetEmail = `http://localhost:${process.env.Client_Port}/reset?token=${token}`
         const emailStruct = {
             from: `"Auth System" <${process.env.NodeMailerEmail}>`, // sender address
             to: email,
             subject: "Reset Password.", // Subject line
-            html: `<p> Hello ${userExist.name}, Please verify your email using the link <a href="${resetEmail}"> reset your password. </a></p>`,
-            text: `<p> Hello ${userExist.name}, Please verify your email using the link <a href="${resetEmail}"> reset your password. </a></p>`,
+            html: `<p> Hello ${userExist.firstName}, Please verify your email using the link <a href="${resetEmail}"> reset your password. </a></p>`,
+            text: `<p> Hello ${userExist.firstName}, Please verify your email using the link <a href="${resetEmail}"> reset your password. </a></p>`,
         };
 
         transporter.sendMail(emailStruct, (error, info) => {

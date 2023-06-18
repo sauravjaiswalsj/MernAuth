@@ -1,8 +1,8 @@
 import React from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { useState } from 'preact/hooks';
-import forgot from '../../services/forgot';
-import { useNavigate } from 'react-router-dom';
+import resetPassword from '../../services/resetPassword';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function reset({ setLoggedIn }) {
 
@@ -10,6 +10,8 @@ export default function reset({ setLoggedIn }) {
         password: '',
     }
     const [passwordData, setPasswordData] = useState(initialSignup);
+    let [searchParams, setSearchParams] = useSearchParams();
+
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -22,12 +24,15 @@ export default function reset({ setLoggedIn }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        let token = searchParams.get('token')
+        setSearchParams(token);
+
         if (!passwordData.password) {
             { alert('Please fill in all the required fields') }
             return;
         }
         try {
-            const res = await forgot(passwordData)
+            const res = await resetPassword(passwordData, token)
             console.log(res);
             alert(res);
             setPasswordData(initialSignup); // Reset the form fields to initial values
@@ -38,7 +43,7 @@ export default function reset({ setLoggedIn }) {
             if (error.statusCode !== 201) {
                 console.error(`Login Failed: ${error.errorText}`);
 
-                alert(error.errorText);
+                alert(error.errorText)
 
                 if (error.errorText.includes("exist")) {
                     setPasswordData(initialSignup);
@@ -67,13 +72,8 @@ export default function reset({ setLoggedIn }) {
                                 value={passwordData.password}
                                 onChange={handleChange} />
 
-                            <div className="d-flex justify-content-between mb-4">
-                                <a href="/signin">Remember password?</a>
-                            </div>
-
                             <div className='text-center text-md-start mt-4 pt-2'>
-                                <MDBBtn className="mb-0 px-5" size='lg'>Forgot</MDBBtn>
-                                <p className="small fw-bold mt-4 pt-2 mb-2">Don't have an account? <a href="/signup" className="link-danger">Register</a></p>
+                                <MDBBtn className="mb-0 px-5" size='lg'>Reset</MDBBtn>
                             </div>
                         </div>
                     </form>
