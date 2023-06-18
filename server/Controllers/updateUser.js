@@ -17,8 +17,6 @@ const updateUser = async (req, res) => {
             designation
         };
 
-        console.log(updatedUserData);
-
         const [rowsAffected] = await User.update(updatedUserData, {
             where: {
                 username: username,

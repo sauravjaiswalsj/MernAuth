@@ -61,7 +61,7 @@ export default function Navbar({ isLoggedIn, setLoggedIn }) {
                             Logout
                         </Button>
                     ) : (
-                        <Button href="#" variant="outlined" onClick={() => navigate('/signin')} sx={{ my: 1, mx: 1.5 }}>
+                        <Button variant="outlined" onClick={() => navigate('/signin')} sx={{ my: 1, mx: 1.5 }}>
                             Login
                         </Button>
                     )}

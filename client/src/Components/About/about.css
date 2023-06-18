@@ -47,19 +47,19 @@
     left: 50%;
   }
   
-  .btn{
+  .buttons{
     background-color: transparent;
     border-width: none;
     box-shadow: none;
     padding-top: 0.5rem;
-   display:inline;
+    display:inline;
   }
 
-  .btn:hover{
+  .buttons:hover{
     background-color: transparent;
     box-shadow: none;
   }
-  check+.btn:hover {
+  check+.buttons:hover {
      box-shadow: none;
 }
   /* Add arrows to the left container (pointing right) 

@@ -36,7 +36,7 @@ export default function App() {
                             <br />
                             <MDBIcon fas icon="code">
                             </MDBIcon>
-                            <MDBBtn href="https://github.com/sauravjaiswalsj/MernAuth/" >
+                            <MDBBtn className="buttons" href="https://github.com/sauravjaiswalsj/MernAuth/" >
                                 Github repo
                             </MDBBtn>
                         </MDBCardBody>

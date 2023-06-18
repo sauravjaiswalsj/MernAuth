@@ -47,6 +47,10 @@ User.init({
     },
     designation: {
         type: DataTypes.STRING,
+    },
+    token: {
+        type: DataTypes.STRING,
+        defaultValue: ''
     }
 }, { sequelize, modelName: "User" }
 );
