@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 *.env
 *.sqlite
-*/*.env
+server/.env
+client/.env
 */*.sqlite
